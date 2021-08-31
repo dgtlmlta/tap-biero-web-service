@@ -87,7 +87,7 @@ class BiereControlleur
 			$this->retour['erreur'] = $this->erreur(401);
 		}
 		
-		$this->retour = $this->ajouterBiere($oReq->parametres);
+		$this->retour['data'] = $this->ajouterBiere($oReq->parametres);
 		
 		return $this->retour;
 	}
@@ -103,7 +103,15 @@ class BiereControlleur
 		{
 			$this->retour['erreur'] = $this->erreur(401);
 		}
+		// Trouver l'id de la biere?
 		
+		if(isset($oReq->url_elements[0]) && is_numeric($oReq->url_elements[0]))
+		{
+			$id_biere = (int)$oReq->url_elements[0];
+			
+			$this->retour['data'] = $this->effacerBiere($id_biere);
+			
+		}
 		return $this->retour;
 		
 	}
@@ -176,6 +184,12 @@ class BiereControlleur
 
 	}
 
+	private function effacerBiere($id_biere){
+		$res = false;
+		$oBiere = new Biere();
+		$res = $oBiere->effacerBiere($id_biere);
+		return $res;
+	}
 
 	/**
 	 * Valide les données d'authentification du service web

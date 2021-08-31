@@ -1,6 +1,6 @@
 <?php
 ini_set('display_errors', 1);
-error_reporting(~0);
+//error_reporting(~0);
 /**
  * Fichier de lancement du service Web
  * @author Jonathan Martel
