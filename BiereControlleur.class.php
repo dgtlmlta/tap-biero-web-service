@@ -68,6 +68,9 @@ class BiereControlleur
 			$this->retour['erreur'] = $this->erreur(401);
 		}
 		
+		//var_dump($oReq->parametres);
+		
+		
 		return $this->retour;
 	}
 	
@@ -78,11 +81,13 @@ class BiereControlleur
 	 */
 	public function putAction(Requete $oReq)		//ajout ou modification
 	{
-		var_dump($oReq);
+		//var_dump($oReq);
 		if(!$this->valideAuthentification())
 		{
 			$this->retour['erreur'] = $this->erreur(401);
 		}
+		
+		$this->retour = $this->ajouterBiere($oReq->parametres);
 		
 		return $this->retour;
 	}
@@ -158,6 +163,20 @@ class BiereControlleur
 		return $res; 
 	}
 	
+	/**
+	 * 
+	 */
+	private function ajouterBiere (Array $uneBiere){
+		$res = 0;
+		
+		$oBiere = new Biere();
+		$res = $oBiere->ajouterBiere($uneBiere);
+
+		return $res;
+
+	}
+
+
 	/**
 	 * Valide les données d'authentification du service web
 	 * @return Boolean Si l'authentification est valide ou non

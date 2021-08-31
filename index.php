@@ -10,8 +10,8 @@ error_reporting(~0);
  * @see http://www.lornajane.net/posts/2012/building-a-restful-php-server-understanding-the-request
  * 
  */
-header('Content-Type: application/json; charset=utf8');
-header('Access-Control-Allow-Origin: *');
+//header('Content-Type: application/json; charset=utf8');
+header('Access-Control-Allow-Origin: *');	// Accepter les requêtes CORS (en origine distincte)
 		
 header('Access-Control-Allow-Methods: OPTIONS, PUT, POST, GET, DELETE');
 header('Access-Control-Allow-Credentials: true');
