@@ -1,11 +1,11 @@
 <?php
 
-// namespace TodoWS\Controlleurs;
+// namespace BieroWS\Controlleurs;
 
-// use TodoWS\lib\Requete;
-// use TodoWS\modeles\Biere;
-// use TodoWS\modeles\Commentaire;
-// use TodoWS\modeles\Usager;
+// use BieroWS\lib\Requete;
+// use BieroWS\modeles\Biere;
+// use BieroWS\modeles\Commentaire;
+// use BieroWS\modeles\Usager;
 
 /**
  * Class BiereControleur
