@@ -115,11 +115,9 @@ class BiereControlleur
                     $this->ajouterCommentaire($id_usager, $id_biere, $oReq->parametres["commentaire"]);
                     break;
                 case 'note':
-                    $modeleUsager = new Usager();
+                    $id_usager = $this->getUsagerIdByCourriel($oReq->parametres["courriel"]);
                     
-                    $id_usager = $modeleUsager->ajouterUsager($oReq->parametres["courriel"]);
-                    
-                    $this->retour["data"] = $this->getNote($id_biere);
+                    $this->enregistrerNote($id_usager, $id_biere, $oReq->parametres["note"]);
                     break;
                 default:
                     unset($this->retour['data']);	
@@ -235,16 +233,15 @@ class BiereControlleur
     }
 
 
-
     /**
-     * Méthode qui ajoute une note à la base de données
+     * Méthode qui ajoute ou modifie une note à la base de données
      * 
      * @param int $id_usager Identifiant de l'usager
      * @param int $id_biere Identifiant de la bière
      * @param Int $note La note
      * @return Mixed Données retournées
      */
-    private function ajouterNote($id_usager, $id_biere, $note)
+    private function enregistrerNote($id_usager, $id_biere, $note)
     {
         $modeleNote = new Note();
 
@@ -255,7 +252,7 @@ class BiereControlleur
 
         $this->retour["data"] = [
             "message" => "Insertion réussie",
-            "commentaireId" => $resultatId
+            "noteId" => $resultatId
         ];
                 
         return $this->retour;
