@@ -58,22 +58,19 @@ class Note extends Modele {
 	 */
 	public function ajouterNote($id_usager, $id_biere, $note) 
 	{
-		$ancienneNote = $this->getNoteParUsagerEtBiere($id_biere, $id_usager);
-		if($ancienneNote)
+		if($ancienneNote = $this->getNoteParUsagerEtBiere($id_biere, $id_usager))
 		{
 			$query = "UPDATE note SET note=". $note." where id_biere=".$id_biere." AND id_usager =".$id_usager;
-			$id_note = $ancienneNote['id_note'];
+			$resQuery = $this->_db->query($query);
+			return ($this->_db->affected_rows == 1) ? $ancienneNote['id_note'] : 0;
 		}
-		else
-		{
-			$query = "INSERT INTO note (note, id_biere, id_usager ) 
+	
+		$query = 
+			"INSERT INTO note (note, id_biere, id_usager ) 
 			VALUES ('".$note. "', ". $id_biere. ",".$id_usager.")";	
-			$id_note = ($this->_db->insert_id ? $this->_db->insert_id : 0);
-		}
-		
 		$resQuery = $this->_db->query($query);
 		
-		return $id_note;
+		return $this->_db->insert_id;
 	}
 	
 	/**
