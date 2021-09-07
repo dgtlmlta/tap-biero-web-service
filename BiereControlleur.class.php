@@ -97,7 +97,7 @@ class BiereControlleur
             return $this->retour;
         }
 
-        if(!isset($oReq->url_elements[0]) || !is_numeric($oReq->url_elements[0]))	// Normalement l'id de la biere 
+        if(!isset($oReq->url_elements[0]) || !is_numeric($oReq->url_elements[0]))	// Vérifier la présence d'un paramètre supplémentaire 
         {
             $this->ajouterBiere($oReq->parametres);
             return $this->retour;
@@ -310,9 +310,13 @@ class BiereControlleur
      */	
     private function getNote($id_biere)
     {
-        
-        $res = Array();
-        return $res; 
+        $modeleNote = new Note();
+
+        return [
+            "id_biere"  => $id_biere,
+            "note"      => $modeleNote->getMoyenne($id_biere),
+            "nombre"    => $modeleNote->getNombre($id_biere)
+        ]; 
     }
     
     /**
@@ -322,7 +326,7 @@ class BiereControlleur
      */	
     private function valideAuthentification()
     {
-          $access = false;
+        $access = false;
         $headers = apache_request_headers();
         
         if(isset($headers['Authorization']))

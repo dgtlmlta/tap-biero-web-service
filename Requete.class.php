@@ -52,7 +52,7 @@ class Requete
         }
 				
         $body_params = json_decode($body);
-		
+
         if($body_params) {
             foreach($body_params as $nom => $valeur) {
 				$parametres[$nom] = $this->aseptiserParametre($valeur);
